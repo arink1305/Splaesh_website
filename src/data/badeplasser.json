@@ -1,0 +1,499 @@
+[
+  {
+    "id": 1,
+    "name": "Huk Strand",
+    "longitude": 10.67666,
+    "latitude": 59.89536,
+    "image": "https://www.oslo.kommune.no/get-image/766294/0/792/16:9/80a299eeabe80d7e5f74262810409f2868e004f78016f16c5e970585dfa888ed",
+    "source": "Bymiljøetaten"
+  },
+
+
+  {
+    "id": 2,
+    "name": "Paradisbukta",
+    "longitude": 10.66579,
+    "latitude": 59.90144,
+    "image": "https://lokalhistoriewiki.no/thumb.php?f=Oslo_Paradisbukta-1_140608.jpg&width=800",
+    "source": "Lokalhistoriewiki"
+  },
+
+  {
+    "id": 3,
+    "name": "Sognsvann",
+    "longitude": 10.72891,
+    "latitude": 59.97499,
+    "image": "https://www.oslo.kommune.no/get-image/766334/0/792/16:9/0e1bab2f71e690ab122030aae1f25b4c52a3f533ac96941d73d7cc64fdfeced0",
+    "source": "Bymiljøetaten"
+  
+  },
+  {
+    "id": 4,
+    "name": "Tjuvholmen Sjøbad",
+    "longitude": 10.72097,
+    "latitude": 59.9063,
+    "image": "https://tellusdmsmedia.newmindmedia.com/wsimgs/Tjuvholmen_Bystrand_VISITOSLO_Torgny_Gustafsson_973882663_1381146058.jpg[ListImageLarge]",
+    "source": "VisitOslo"
+  },
+
+  {
+    "id": 5,
+    "name": "Sørenga Sjøbad",
+    "longitude": 10.75123,
+    "latitude": 59.90118,
+    "image": "https://www.oslo.kommune.no/get-image/766350/0/792/16:9/13c0ee061713166869093cd198522fbd8fbfa988de0db634c98421b850665917",
+    "source": "Bymiljøetaten"
+  },
+  {
+    "id": 6,
+    "name": "Ingierstrand Bad",
+    "longitude": 10.7479,
+    "latitude": 59.81745,
+    "image": "https://www.oslo.kommune.no/get-image/766305/0/792/16:9/12606159c19b8b43ad84b9061b8d6df61648794f1cfd208e288a2c7b093941e0",
+    "source": "Bymiljøetaten"
+  },
+  {
+    "id": 7,
+    "name": "Katten Badeplass",
+    "longitude": 10.78321,
+    "latitude": 59.85521,
+    "image": "https://www.oslo.kommune.no/get-image/766307/0/792/16:9/223cfecd9a47c5505876f761e1a6a00776ab842eb54cea3376c8fbe7b53a88bc",
+    "source": "Bymiljøetaten"
+  },
+  {
+    "id": 8,
+    "name": "Hvervenbukta",
+    "longitude": 10.77133,
+    "latitude": 59.83307,
+    "image": "https://www.oslo.kommune.no/get-image/766299/0/792/16:9/d55deaa1e3843c14bb88a04183e27081ba85ea4813ab15041082a405baa4f71a",
+    "source": "Bymiljøetaten"
+  },
+  {
+    "id": 9,
+    "name": "Nøklevann",
+    "longitude": 10.87726,
+    "latitude": 59.87856,
+    "image": "https://www.oslo.kommune.no/get-image/766329/0/792/16:9/bd5d7d388b56813fcbd907a10767673eca963af5630575f1990397b21edb99db",
+    "source": "Bymiljøetaten"
+  },
+  {
+    "id": 10,
+    "name": "Langøyene",
+    "longitude": 10.71895,
+    "latitude": 59.87251,
+    "image": "https://www.oslo.kommune.no/get-image/766312/0/792/16:9/7c5f43cf5857a1a9e025e51fdf710569b19c912932a8c52e49a99fbdf06bf09f",
+    "source": "Bymiljøetaten"
+  },
+  {
+    "id": 11,
+    "name": "Bygdøy Sjøbad",
+    "longitude": 10.66628,
+    "latitude": 59.91114,
+    "image": "https://live.staticflickr.com/65535/52110940751_05850b9370_b.jpg",
+    "source": "Flickr"
+  },
+  {
+    "id": 12,
+    "name": "Nordstrand Bad",
+    "longitude": 10.78204,
+    "latitude": 59.86876,
+    "image": "https://www.oslo.kommune.no/get-image/766325/0/792/16:9/2ec47100424d188ea60c17f2dcacf94193f5de00c79ba96fa2412654338a0c0e",
+    "source": "Bymiljøetaten"
+  },
+  {
+    "id": 13,
+    "name": "Brekkedammen ved Frysja",
+    "longitude": 10.77815,
+    "latitude": 59.96669,
+    "image": "https://reisehjerte.no/wp-content/uploads/2018/05/Frysja-Reisehjerte-reiseblogg.jpg",
+    "source": "Reisehjerte"
+  },
+  {
+    "id": 14,
+    "name": "Kalvøya",
+    "longitude": 10.53804,
+    "latitude": 59.88498,
+    "image": "https://www.baerum.kommune.no/globalassets/tjenester/natur-kultur-og-fritid/badeplasser/kalvoya-hovedstranden.jpg?width=900&mode=pad&anchor=middlecenter&scale=down&factor=2",
+    "source": "Bærum Kommune"
+  },
+  {
+    "id": 15,
+    "name": "Kadettangen",
+    "longitude": 10.52649,
+    "latitude": 59.88884,
+    "image": "https://www.baerum.kommune.no/globalassets/tjenester/natur-kultur-og-fritid/badeplasser/badebinge-pa-kadettangen.jpg?width=1500&height=700&anchor=middlecenter&mode=crop",
+    "source": "Bærum Kommune"
+  },
+  {
+    "id": 16,
+    "name": "Saltverket Badeplass",
+    "longitude": 10.06932,
+    "latitude": 59.03055,
+    "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFak6SQTo-IQXUzI_byU_IFpzW1rqzUVKMdFUTHedEOTO_P57pysJKAoX28YjxPqNjUJwWrdhAlKORQ9NAk9IAj05PVMxW0w6t4yJhyNocSgSixCWRHRVkp7s7IqTo-oiKXnGlbbg=s1360-w1360-h1020-rw",
+    "source": "Egil Hallberg via Google"
+  },
+  {
+    "id": 17,
+    "name": "Mølen Strand",
+    "longitude": 9.82227,
+    "latitude": 58.97475,
+    "image": "https://static.wixstatic.com/media/922458_3b4f0a497dd34a65aceae33b30deee4a~mv2.jpg/v1/fill/w_980,h_551,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/922458_3b4f0a497dd34a65aceae33b30deee4a~mv2.jpg",
+    "source": "Turideer"
+  },
+  {
+    "id": 18,
+    "name": "Kruke Strand",
+    "longitude": 10.45061,
+    "latitude": 59.08307,
+    "image": "https://www.oslofjorden.com/bilde_badestrand/vestfold/sandoesund_strand.jpg",
+    "source": "Oslofjorden.no"
+  },
+  {
+    "id": 19,
+    "name": "Verdens Ende",
+    "longitude": 10.40666,
+    "latitude": 59.05861,
+    "image": "https://www.visitvestfold.com/_next/image?url=https%3A%2F%2Fwordpress.visitvestfold.com%2Fwp-content%2Fuploads%2F2025%2F03%2FVerdens-ende-Didrick-Stenersen.jpg&w=3840&q=75",
+    "source": "Visitvestfold.com"
+  },
+  {
+    "id": 20,
+    "name": "Sola Strand",
+    "longitude": 5.60476,
+    "latitude": 58.88499,
+    "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAFzZozMIMKqUGn0TvZ_iPSnSCgw3gsa1A0bGY-hsoooyibbwmWeUc5hqMiUGrWWQ2M2sV7VZha49EPNisVAabEeJsMVqCM-BG_VJj-kanyQ5hrxJdn5QO6a0yvwNsMZes6gdfUu=s1360-w1360-h1020-rw",
+    "source": "Lukasz Rosinski via Google"
+  },
+  {
+    "id": 21,
+    "name": "Orrestranda",
+    "longitude": 5.51395,
+    "latitude": 58.7327,
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/e3/e6/35/orre-beach.jpg?w=700&h=-1&s=1",
+    "source": "Tripadvisor"
+  },
+
+  {"id": 22,
+    "name": "Godalen Strand",
+    "longitude": 5.756650,
+    "latitude": 58.954011,
+    "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEwJc0RTEKpth03CD-p6G-MI9GFxFOoJXafGALrqGVU6HJtFjRdepyJD_KOUzXwLCJRTRfPF9MBkEV7a9uj4ChkLCff_ldJFsnJOfnsETu-QIq4LVbBRlHFr3kuTqoOYME1aLNH=s1360-w1360-h1020-rw",
+    "source": "Google"},
+
+  {"id": 23,
+    "name": "Sandviken Sjøbad",
+    "longitude": 5.309265,
+    "latitude": 60.417311,
+    "image": "https://www.visitbergen.com/imageresizer/?image=%2Fdmsimgs%2F0AE2B61CA16C4FBF3A16B0ACC68BA8F3788582F1.jpg&action=ProductDetailExtraLargeNew",
+    "source": "Gjertrud Couthino via Visit Bergen"
+  },
+
+{"id": 24,
+  "name": "Nordnes Sjøbad",
+  "longitude": 5.302515,
+  "latitude": 60.398989,
+  "image": "https://www.visitbergen.com/imageresizer/?image=%2Fdmsimgs%2F638794D15621A3EBE25F6BB48103CC321F1297B9.jpg&action=ProductDetailExtraLargeNew&crop=4D037E16BCDE2AD8418DEA664E1AA2",
+  "source": "Katarina Lunde via Visit Bergen"
+},
+
+{"id": 25,
+  "name": "Grønevika Badeplass",
+  "longitude": 5.273611,
+  "latitude": 60.155769,
+  "image": "https://www.visitbergen.com/imageresizer/?image=%2Fdmsimgs%2F240525_Gr_nevika_Arboretet_p_Milde_1707122213.jpg&action=ProductDetailExtraLargeNew",
+  "source": "Helene Øvden via Visit Bergen"
+},
+
+{"id": 26,
+  "name": "Hestsjøen badeplass",
+  "longitude": 10.280112,
+  "latitude": 63.358152,
+  "image": "https://www.trondheim.kommune.no/globalassets/10-bilder-og-filer-eksternt/07-kultur-og-idrett/idrett-og-friluftsliv/badeplasser/hestsjoen2.jpg?mode=crop&scale=both&quality=80&format=webp&width=768&crop=321,0,825,504",
+  "source": "Trondheim Kommune"
+},
+
+{"id": 27,
+  "name": "Korsvika",
+  "longitude": 10.434701,
+  "latitude": 63.450444,
+  "image": "https://visittrondheim.no/wp-content/uploads/2021/05/Korsvika_MG_7469_RGB_1500px.jpg",
+  "source": "Trondheim Kommune"
+},
+
+{"id": 28,
+  "name": "Fjordpromenaden",
+  "longitude": 10.386355,
+  "latitude": 63.434094,
+  "image": "https://visittrondheim.no/wp-content/uploads/2021/05/HavnepromenadenTrondheim.jpg",
+  "source": "Visit Trondheim"
+},
+
+{"id": 29,
+  "name": "Torps Stranda",
+  "longitude": 11.025604,
+  "latitude": 60.804015,
+  "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEHQeJwYRFruWlqQjMCrYDQbtyB8ISaPWHk8Z0jYbeCmz4Jxf7MFhIvgNi0E27z2E2cDPF4sYrpiiCZfOe_-Iawog4u50zRbgh57E0RlAwDiy2xcoT4v5JAsp-WaoFZZORNS3Q=s1360-w1360-h1020-rw",
+  "source": "Mona Engjom Reiten via Google"
+},
+
+{
+  "id": 30,
+  "name": "Hamar Koigen",
+  "longitude": 11.05976,
+  "latitude": 60.79371,
+  "image": "https://www.hamar.kommune.no/getfile.php/1312474-1652437343/Hamar%20kommune/Kategorier/By%2C%20milj%C3%B8%20og%20n%C3%A6ring/bading-i-Hamar-foto-frederik-garshol.jpg%20%28optimized_original%29.webp",
+  "source": "Hamar Kommune"
+},
+
+{"id": 31,
+  "name": "Selvika Badeplass",
+  "longitude": 24.6081,
+  "latitude": 70.9147,
+  "image": "https://friluftsforvaltning.avinet.no/WebServices/generic/Media.asmx/Download?uuid=54714929-fa27-4d66-a034-8fb204fad015",
+  "source": "Vestkystparken"
+},
+
+{"id": 32,
+  "name": "Telegrafbukta",
+  "longitude": 18.906535,
+  "latitude": 69.6350,
+  "image": "https://images.citybreakcdn.com/image.aspx?ImageId=6964643&height=800&width=1200&fitaspect=1",
+  "source": "Visit Tromsø"
+},
+
+{"id": 33,
+  "name": "Hauklandstranda",
+  "longitude": 13.528073,
+  "latitude": 68.198411,
+  "image": "https://v.imgi.no/visitlofoten-5653-700b5752a30bb67c6ef85db74f5e2fa1-5176x3451/",
+  "source": "Visit Lofoten"
+},
+
+{"id": 34,
+  "name": "Rambergstranda",
+  "longitude": 13.243196,
+  "latitude": 68.097990,
+  "image": "https://www.nasjonaleturistveger.no/contentassets/eab624c1d9984bfea1c8b3d30ea7345b/006068-rambergstr-jw.jpg?mode=crop&width=800&height=800",
+  "source": "Statens Vegvesen"
+},
+
+{"id": 35,
+  "name": "Gangvatnet berg badeplass",
+  "longitude": 14.445893,
+  "latitude": 67.222533,
+  "image": "https://www.turbading.com/gallery/gangvatnet8-2308.jpg",
+  "source": "Turbading.no"
+},
+
+{"id": 36,
+  "name": "Mjellestranda",
+  "longitude": 14.632364,
+  "latitude": 67.421783,
+  "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/a5/15/d5/hovdsundet-it-s-hard.jpg?w=1600&h=-1&s=1",
+  "source": "Svein Magne Tunli via Tripadvisor"
+},
+
+{"id": 37,
+  "name": "Åkrasanden",
+  "longitude": 5.195760,
+  "latitude": 59.248436,
+  "image": "https://files.solvecms.com/friluftsraadet-vest-no/a5f9fe4/åkra.png?v=1595247406051](https://files.solvecms.com/friluftsraadet-vest-no/a5f9fe4/%C3%A5kra.png?v=1595247406051)",
+  "source": "Friluftsrådet Vest"
+},
+
+{
+    "id": 38,
+    "name": "Sandvesanden",
+    "longitude": 5.195254,
+    "latitude": 59.171133,
+    "image": "https://www.visitnorway.no/_next/image/?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fjlrwvnbf%2Fcommercial%2F225e26aa92986fed788bd418a47f8c4a447327ad-5472x3648.jpg%3Frect%3D0%2C274%2C5472%2C3101%26w%3D1500%26h%3D850%26auto%3Dformat&w=3840&q=75",
+    "source": "Visit Norway"
+  },
+  {
+    "id": 39,
+    "name": "Lomsesanden",
+    "longitude": 6.7963635921,
+    "latitude": 58.066238956,
+    "image": "https://assets.simpleviewinc.com/simpleview/image/fetch/c_fill,h_2000,q_70,w_3000/https://tellusdmsmedia.newmindmedia.com/wsimgs/8517B1B40F899F6671B07F469DF5D0CF0EA6FC41.jpg[WebServiceHighQualityLimit]",
+    "source": "Visit Sørlandet"
+  },
+  {
+    "id": 40,
+    "name": "Hamresanden",
+    "longitude": 8.08248,
+    "latitude": 58.19042,
+    "image": "https://assets.simpleviewinc.com/simpleview/image/fetch/c_fill,h_2000,q_70,w_3000/https://tellusdmsmedia.newmindmedia.com/wsimgs/Hamresanden_13__1288964150.jpg[WebServiceHighQualityLimit]",
+    "source": "Visit Sørlandet"
+  },
+  {
+    "id": 41,
+    "name": "Hvalstrand Bad",
+    "longitude": 10.488910,
+    "latitude": 59.842063,
+    "image": "https://static.visitnorway.com/images/jlrwvnbf/commercial/050e4c1c0cd1f31faf25df96a1c37e135cea1036-3008x2000.jpg?rect=0,148,3008,1705&w=1500&h=850&q=75&auto=format",
+    "source": "Visit Norway"
+  },
+  {
+    "id": 42,
+    "name": "Hornstranda",
+    "longitude": 10.654841,
+    "latitude": 59.868385,
+    "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGA6fgI2wu0nkP9EJzOOAVAgev-Su_i5VL2xVHW7IAMXFfUfwxwyJsPm7uIxgWAbIskbDE_cMidsR74DsGzgrinsEpSOV5aSjvP2AenYcAXTcU3c99FeOV1rHwDK0lK7qJmcm2epw=s1360-w1360-h1020-rw",
+    "source": "Ian Race via Google"
+  },
+  {
+    "id": 43,
+    "name": "Bekkelagsbadet",
+    "longitude": 10.765274,
+    "latitude": 59.880203,
+    "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAHUiZ8-1ozgMq2wp1p75fPc5cUUmGns7eiBtTZGiEH1AwX7A8QE62jnLeBZbrqgrAaW28o02_cu-lBCxu1ee6-At-PIO-3-s27C8I_k01VNjZ3aALZGvSXyYltL0Hhs1BJarXi6=s1360-w1360-h1020-rw",
+    "source": "Google"
+  },
+  {
+    "id": 44,
+    "name": "Sollerudstranda",
+    "longitude": 10.646917,
+    "latitude": 59.912640,
+    "image": "https://www.oslo.kommune.no/get-image/766338/0/792/16:9/bc190e9a4ef42370fb820342114ffbb0eacfdb88b4e66b8c741dc697060f647f",
+    "source": "Bymiljøetaten"
+  },
+  {
+    "id": 45,
+    "name": "Lillesand Bystrand",
+    "longitude": 8.378280,
+    "latitude": 58.248096,
+    "image": "https://vcdn.polarismedia.no/65e23d5d-6c37-4756-8667-a5b408561bc7?fit=clip&h=700&q=80&tight=false&w=1000",
+    "source": "Lars Hollerud via Fedrelandsvennen"
+  },
+  {
+    "id": 46,
+    "name": "Bystranda",
+    "longitude": 8.007442,
+    "latitude": 58.146126,
+    "image": "https://assets.simpleviewinc.com/simpleview/image/fetch/c_fill,h_2000,q_70,w_3000/https://tellusdmsmedia.newmindmedia.com/wsimgs/Palmer-bystranda-Kristiansand_1895698611.jpg[WebServiceHighQualityLimit]",
+    "source": "Visit Sørlandet"
+  },
+  {
+    "id": 47,
+    "name": "Hoddevikstranda",
+    "longitude": 5.160800,
+    "latitude": 62.123742,
+    "image": "https://gfx.nrk.no/50hK8c2jzIxI35FPAhZFDQsb6qeFG3lQVZlQ6CNKk-tQ.jpg",
+    "source": "Jan Ove Hoddevik via NRK"
+  },
+  {
+    "id": 48,
+    "name": "Selsåvika badeplass",
+    "longitude": 5.521670,
+    "latitude": 59.586153,
+    "image": "https://www.visitnorway.no/_next/image/?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fjlrwvnbf%2Fcommercial%2F9df6204283fa2cde82aa7ede42ed45ace24f95cf-4191x2744.jpg%3Frect%3D0%2C185%2C4191%2C2375%26w%3D1500%26h%3D850%26auto%3Dformat&w=3840&q=75",
+    "source": "Visit Norway"
+  },
+  {
+    "id": 49,
+    "name": "Kringstadbukta",
+    "longitude": 7.086659,
+    "latitude": 62.733595,
+    "image": "https://www.molde.kommune.no/handlers/bv.ashx/i383cdfd3-a595-4c41-a4af-87c78f03ffd5/w1000/h1000/q14297/k35f6311b591b/kringstadbuktabadestrand2.jpg",
+    "source": "Molde Kommune"
+  },
+  {
+    "id": 50,
+    "name": "Prinsen Strand",
+    "longitude": 6.253860,
+    "latitude": 62.461005,
+    "image": "https://alesund.kommune.no/handlers/bv.ashx/i944189f9-1f74-4975-bf72-8bb1ecfb2b5a/w1200/q16655/k58a0049eff4c/prinsen_ald_16425.JPG",
+    "source": "Ålesund Kommune"
+  },
+  {
+    "id": 51,
+    "name": "Nærøyfjorden badeplass",
+    "longitude": 6.869515,
+    "latitude": 60.918295,
+    "image": "https://zpin.it/image/3/39bb325a943c53652d1201df1ed50796.png",
+    "source": "Camping.no"
+  },
+
+  {
+    "id": 52,
+    "name": "Dispeholmen",
+    "longitude": 6.917612,
+    "latitude": 61.933805,
+    "image": "https://www.visitnorway.no/_next/image/?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fjlrwvnbf%2Fcommercial%2F05dd701919ddd1a24b16b1e157fd775ca695eb89-2048x1364.jpg%3Frect%3D0%2C102%2C2048%2C1161%26w%3D1500%26h%3D850%26auto%3Dformat&w=3840&q=75",
+    "source": "Visit Norway"
+  },
+  {
+    "id": 53,
+    "name": "Alta Strand & Camping",
+    "longitude": 23.269191,
+    "latitude": 69.927932,
+    "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAEDEJ5P0ntuPjgbsVEu7uY9G350Oe2bTLY3kzIOj-__UKoWSvZXlqLIavvwXMyKXseMiprtG6kgQTdeobiKoGyLyPStRv0ohecc4E2q-AirTNf4ndfKSP2Id8H4Yid_Cm9O=s1360-w1360-h1020",
+    "source": "Hanneke via Google"
+  },
+  {
+    "id": 54,
+    "name": "Fjellvatn badeplass",
+    "longitude": 30.05437,
+    "latitude": 69.7173,
+    "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGndhIpgWTlgWv9Vxn4nhoZCdO4dleqz1u2CXDAu_IIEWE0wjzO5FRFYrgLvEcRFVW_Oy4GkFClWArSqGmA_Coj44KH9xPi8dDTEFyKRiG7BlM7jEaNHVV2tKZm7T0W7liK7j4ujA=s1360-w1360-h1020-rw",
+    "source": "Olle Olsson via Google"
+  },
+  {
+    "id": 55,
+    "name": "Torvenauststøa",
+    "longitude": 17.57565,
+    "latitude": 68.37377,
+    "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGiVUW_gtvopKUNDMfz6LlRpSf-caX74h3H6CyFTP9GVIlZQYfk0sQEKTSXS8WuTTCS-TvtfmzByzoynP3Ul5Y_sG6TRsoyc08x69udLnXozTxcHM1z-Zsl3UMpX2EZjthLqktHsA=s1360-w1360-h1020",
+    "source": "Mika Friedrich via Google"
+  },
+  {
+    "id": 56,
+    "name": "Hagavatnet badeplass",
+    "longitude": 16.54091,
+    "latitude": 68.81659,
+    "image": "https://lh3.googleusercontent.com/gps-cs-s/APNQkAGcv_JsE2ELYKUHok0L_eEuL4PvSv8S3bS5102SQaGhMzpMEzWmmnWQ7pbMVc4km96MtFRfvtJXxCgMk93bBJofAypI8-Gpkg81Q0ciHi7MeggegWO4a0ZU5MQHjsNY6dxsz7TMKw=s1360-w1360-h1020-rw",
+    "source": "Google"
+  },
+  {
+    "id": 57,
+    "name": "Nøstodden",
+    "longitude": 10.26571,
+    "latitude": 59.72165,
+    "image": "https://www.oslofjorden.com/bilde_badestrand/buskerud/noestodden_badeplass_drammen_oversikt.JPG",
+    "source": "Oslofjorden.no"
+  },
+  {
+    "id": 58,
+    "name": "Vispen badeplass",
+    "longitude": 11.06741,
+    "latitude": 59.21581,
+    "image": "https://www.fredrikstad.kommune.no/media/xdnfqxvk/vispen.jpg?rmode=max&width=500",
+    "source": "Fredrikstad kommune"
+  },
+  {
+    "id": 59,
+    "name": "Kuvauen badeplass",
+    "longitude": 10.83965,
+    "latitude": 59.09196,
+    "image": "https://www.oslofjorden.com/bilde_badestrand/ostfold/kuvauen_hvaler_oversikt.JPG",
+    "source": "Oslofjorden.no"
+  },
+  {
+    "id": 60,
+    "name" : "Gillundstranda",
+    "longitude": 11.1047,
+    "latitude": 60.71072,
+    "image":"https://www.stange.kommune.no/getfile.php/1330119-1675253784/Stange%20kommune/BILDER%20-%20STANGE/Friluftsliv%20og%20natur/Gillundstranda.JPG%20%28optimized_original%29.webp" ,
+    "source" : "Stange Kommune"
+  },
+
+  {
+    "id": 61,
+    "name" : "Grønnesbukta",
+    "longitude": 6.66271,
+    "latitude": 58.287,
+    "image":"https://listerfriluft.no/media/19045/sam_1649_b720_h480.jpg",
+    "source" : "Listerfriluft"
+  }
+
+]
