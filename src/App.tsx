@@ -43,6 +43,7 @@ export default function App() {
   const { favoriteIds, toggle, removeMany, isFavorite } = useFavorites()
 
   const previousTab = useRef<Tab>(tab)
+  const navRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     if (previousTab.current === 'favorites' && tab !== 'favorites' && pendingRemovalIds.length > 0) {
@@ -54,6 +55,9 @@ export default function App() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+    navRef.current
+      ?.querySelector<HTMLElement>('[aria-current="true"]')
+      ?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' })
   }, [tab])
 
   const favorites = useMemo(
@@ -81,7 +85,7 @@ export default function App() {
             <span className="brand-word">Splæsh</span>
           </p>
 
-          <nav className="topnav">
+          <nav className="topnav" ref={navRef}>
             {TABS.map(([key, icon, label]) => (
               <button
                 key={key}

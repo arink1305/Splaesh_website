@@ -2,15 +2,10 @@ import { useCallback, useEffect, useState } from 'react'
 import { applyTheme, prefersDark, readSettings, writeSettings, type Settings } from '../state/settings'
 
 export function useSettings() {
-  const [settings, setSettings] = useState<Settings>(() => ({
-    dark: false,
-    profile: 'standard',
-  }))
+  const [settings, setSettings] = useState<Settings>(readSettings)
 
   useEffect(() => {
-    const stored = readSettings()
-    setSettings(stored)
-    applyTheme(stored.dark)
+    applyTheme(settings.dark)
   }, [])
 
   const update = useCallback((patch: Partial<Settings>) => {
