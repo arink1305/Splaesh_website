@@ -2,11 +2,15 @@ import {
   GeolocateControl,
   MapLibreMap,
   NavigationControl,
+  setWorkerUrl,
   type GeoJSONSource,
   type MapLayerMouseEvent,
   type RasterTileSource,
 } from 'maplibre-gl'
+import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import 'maplibre-gl/dist/maplibre-gl.css'
+
+setWorkerUrl(maplibreWorkerUrl)
 import { useEffect, useRef, useState } from 'react'
 import { locationsToGeoJson, warningsToGeoJson } from '../lib/geojson'
 import {
