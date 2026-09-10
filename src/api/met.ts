@@ -1,15 +1,17 @@
 import type { ForecastResponse } from '../types/forecast'
 import type { OceanForecastResponse } from '../types/ocean'
 import type { MetAlertFeature, MetAlertsResponse, Ring, Warning } from '../types/warning'
-import { MET_BASE_URL, getJson } from './client'
+import { getMetJson } from './client'
 
 export function fetchForecast(
   latitude: number,
   longitude: number,
   signal?: AbortSignal,
 ): Promise<ForecastResponse> {
-  const url = `${MET_BASE_URL}/weatherapi/locationforecast/2.0/compact?lat=${latitude}&lon=${longitude}&altitude=0`
-  return getJson<ForecastResponse>(url, signal)
+  return getMetJson<ForecastResponse>(
+    `/weatherapi/locationforecast/2.0/compact?lat=${latitude}&lon=${longitude}&altitude=0`,
+    signal,
+  )
 }
 
 export function fetchOceanForecast(
@@ -17,14 +19,16 @@ export function fetchOceanForecast(
   longitude: number,
   signal?: AbortSignal,
 ): Promise<OceanForecastResponse> {
-  const url = `${MET_BASE_URL}/weatherapi/oceanforecast/2.0/complete?lat=${latitude}&lon=${longitude}`
-  return getJson<OceanForecastResponse>(url, signal)
+  return getMetJson<OceanForecastResponse>(
+    `/weatherapi/oceanforecast/2.0/complete?lat=${latitude}&lon=${longitude}`,
+    signal,
+  )
 }
 
 export async function fetchWarnings(signal?: AbortSignal): Promise<Warning[]> {
   try {
-    const response = await getJson<MetAlertsResponse>(
-      `${MET_BASE_URL}/weatherapi/metalerts/2.0/current.json`,
+    const response = await getMetJson<MetAlertsResponse>(
+      '/weatherapi/metalerts/2.0/current.json',
       signal,
     )
     return (response.features ?? []).map(toWarning).filter((item): item is Warning => item !== null)
