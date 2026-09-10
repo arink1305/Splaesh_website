@@ -653,61 +653,6 @@ body {
   text-align: center;
 }
 
-@media (max-width: 900px) {
-  .topnav {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .topnav::-webkit-scrollbar {
-    display: none;
-  }
-
-  .nav-item {
-    flex: none;
-    white-space: nowrap;
-  }
-
-  .shell {
-    padding: 26px 16px 64px;
-  }
-
-  .places-wrap {
-    position: static;
-  }
-
-  .places {
-    max-height: 320px;
-  }
-}
-
-@media (max-width: 800px) {
-  .appbar-inner {
-    flex-wrap: wrap;
-    gap: 8px 12px;
-    padding: 10px 16px;
-  }
-
-  .topnav {
-    order: 3;
-    width: 100%;
-    margin-left: 0;
-    gap: 2px;
-  }
-
-  .nav-item {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  .theme-toggle {
-    margin-left: auto;
-    width: 38px;
-    height: 38px;
-  }
-}
 
 .search {
   position: relative;
@@ -1697,6 +1642,62 @@ html {
 
   .score-ring {
     transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .topnav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .topnav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-item {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  .shell {
+    padding: 26px 16px 64px;
+  }
+
+  .places-wrap {
+    position: static;
+  }
+
+  .places {
+    max-height: 320px;
+  }
+}
+
+@media (max-width: 800px) {
+  .appbar-inner {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding: 10px 16px;
+  }
+
+  .topnav {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+    gap: 2px;
+  }
+
+  .nav-item {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .theme-toggle {
+    margin-left: auto;
+    width: 38px;
+    height: 38px;
   }
 }
 
