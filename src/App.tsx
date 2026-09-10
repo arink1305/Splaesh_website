@@ -31,6 +31,7 @@ export default function App() {
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(0)
   const [radiusKm, setRadiusKm] = useState(5)
   const [pendingRemovalIds, setPendingRemovalIds] = useState<number[]>([])
+  const [mapFocus, setMapFocus] = useState(0)
   const [layers, setLayers] = useState<MapLayerToggles>({
     temp: false,
     rain: false,
@@ -44,6 +45,7 @@ export default function App() {
 
   const previousTab = useRef<Tab>(tab)
   const navRef = useRef<HTMLElement>(null)
+  const skipTopScroll = useRef(false)
 
   useEffect(() => {
     if (previousTab.current === 'favorites' && tab !== 'favorites' && pendingRemovalIds.length > 0) {
@@ -54,7 +56,11 @@ export default function App() {
   }, [tab, pendingRemovalIds, removeMany])
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (skipTopScroll.current) {
+      skipTopScroll.current = false
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
     navRef.current
       ?.querySelector<HTMLElement>('[aria-current="true"]')
       ?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' })
@@ -66,8 +72,15 @@ export default function App() {
   )
 
   function openOnMap(location: Location) {
+    skipTopScroll.current = true
     setSelected(location)
     setTab('home')
+    setMapFocus((value) => value + 1)
+  }
+
+  function selectFromSearch(location: Location) {
+    setSelected(location)
+    setMapFocus((value) => value + 1)
   }
 
   function togglePendingRemoval(id: number) {
@@ -124,7 +137,11 @@ export default function App() {
       </header>
 
       {tab === 'home' && (
-        <Hero locations={locations} warningCount={warnings.length} onSelect={setSelected} />
+        <Hero
+          locations={locations}
+          warningCount={warnings.length}
+          onSelect={selectFromSearch}
+        />
       )}
 
       <main className="shell">
@@ -144,6 +161,7 @@ export default function App() {
               onTimeChange={setSelectedTimeIndex}
               isFavorite={isFavorite}
               onToggleFavorite={toggle}
+              mapFocus={mapFocus}
             />
           )}
 

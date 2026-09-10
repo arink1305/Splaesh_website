@@ -1,9 +1,12 @@
+import { useEffect } from 'react'
 import LayerToggles from '../components/LayerToggles'
 import MapView, { type MapLayerToggles } from '../components/MapView'
 import ScorePanel from '../components/ScorePanel'
 import TimeScroller from '../components/TimeScroller'
 import { usePlaceData } from '../hooks/usePlaceData'
 import { calculateBathingScore } from '../lib/bathingScore'
+import { waterLabel } from '../lib/place'
+import { scrollToElement } from '../lib/scroll'
 import { wmsTimeAt } from '../lib/timeSteps'
 import {
   resolveWarningSeverityForLocation,
@@ -27,6 +30,7 @@ interface HomeScreenProps {
   onTimeChange: (index: number) => void
   isFavorite: (id: number) => boolean
   onToggleFavorite: (id: number) => void
+  mapFocus: number
 }
 
 export default function HomeScreen({
@@ -43,8 +47,18 @@ export default function HomeScreen({
   onTimeChange,
   isFavorite,
   onToggleFavorite,
+  mapFocus,
 }: HomeScreenProps) {
   const { data, loading, error } = usePlaceData(selected)
+
+  useEffect(() => {
+    if (mapFocus === 0) return
+    scrollToElement('kart')
+  }, [mapFocus])
+
+  function showDetails() {
+    scrollToElement('badeplass-detaljer')
+  }
 
   const severity = selected
     ? resolveWarningSeverityForLocation(selected.latitude, selected.longitude, warnings)
@@ -76,7 +90,7 @@ export default function HomeScreen({
 
       <LayerToggles layers={layers} onChange={onLayersChange} />
 
-      <div className="map-frame">
+      <div className="map-frame" id="kart">
         <MapView
           locations={locations}
           warnings={warnings}
@@ -86,6 +100,8 @@ export default function HomeScreen({
           layers={layers}
           wmsTime={wmsTimeAt(baseTime, selectedTimeIndex)}
           selectedTimeIndex={selectedTimeIndex}
+          waterLabel={selected ? waterLabel(selected.name, data?.seaCovered) : 'Saltvann'}
+          onShowDetails={showDetails}
         />
       </div>
 
@@ -144,7 +160,7 @@ export default function HomeScreen({
           </ul>
         </div>
 
-        <section className="panel">
+        <section className="panel" id="badeplass-detaljer">
           {!selected && <p className="state">Velg en badeplass.</p>}
           {selected && (
             <ScorePanel

@@ -7,6 +7,7 @@ import type { SeaInfo } from '../types/ocean'
 export interface PlaceData {
   forecasts: DailyForecast[]
   seaInfo: SeaInfo | null
+  seaCovered: boolean | null
   currentUv: number | null
   airTemperature: number | null
 }
@@ -27,9 +28,12 @@ export function getPlaceData(latitude: number, longitude: number): Promise<Place
 }
 
 async function fetchPlaceData(latitude: number, longitude: number): Promise<PlaceData> {
-  const [forecastResponse, oceanResponse, dailyUv, currentUv] = await Promise.all([
+  const [forecastResponse, oceanResult, dailyUv, currentUv] = await Promise.all([
     fetchForecast(latitude, longitude),
-    fetchOceanForecast(latitude, longitude).catch(() => null),
+    fetchOceanForecast(latitude, longitude).then(
+      (value) => ({ ok: true as const, value }),
+      () => ({ ok: false as const, value: null }),
+    ),
     fetchDailyUv(latitude, longitude),
     fetchCurrentUv(latitude, longitude),
   ])
@@ -39,7 +43,8 @@ async function fetchPlaceData(latitude: number, longitude: number): Promise<Plac
     uvMax: dailyUv[forecast.dateKey] ?? null,
   }))
 
-  const details = oceanResponse?.properties.timeseries[0]?.data.instant.details ?? null
+  const details = oceanResult.value?.properties.timeseries[0]?.data.instant.details ?? null
+  const seaCovered = oceanResult.ok ? details !== null : null
   const seaInfo: SeaInfo | null = details
     ? {
         waterTemperature: details.sea_water_temperature ?? null,
@@ -53,6 +58,7 @@ async function fetchPlaceData(latitude: number, longitude: number): Promise<Plac
   return {
     forecasts,
     seaInfo,
+    seaCovered,
     currentUv,
     airTemperature:
       forecastResponse.properties.timeseries[0]?.data.instant.details.air_temperature ?? null,

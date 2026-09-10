@@ -982,6 +982,124 @@ body {
   align-items: start;
 }
 
+.splaesh-popup .maplibregl-popup-content {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.splaesh-popup .maplibregl-popup-tip {
+  border-top-color: var(--card);
+  border-bottom-color: var(--card);
+  border-width: 12px;
+}
+
+.mp {
+  position: relative;
+  width: 244px;
+  padding: 20px 20px 18px;
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: 0 12px 32px rgba(16, 24, 40, 0.22);
+  font-family: var(--sans);
+  text-align: left;
+}
+
+:root[data-theme='dark'] .mp {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+.mp-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mp-close:hover {
+  background: var(--sunk);
+  color: var(--title);
+}
+
+.mp-title {
+  margin: 0 0 10px;
+  padding-right: 26px;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--title);
+}
+
+.mp-region {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 15px;
+  color: var(--body);
+}
+
+.mp-icon {
+  display: inline-flex;
+  flex: none;
+}
+
+.mp-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--tint);
+  color: var(--accent);
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.mp-badge .mp-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.mp-cta {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(100deg, #3c9dc4 0%, #2b7fa6 100%);
+  color: #ffffff;
+  font: inherit;
+  font-size: 15.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.mp-cta:hover {
+  filter: brightness(1.06);
+}
+
+#kart,
+#badeplass-detaljer {
+  scroll-margin-top: 84px;
+}
+
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: 1fr;

@@ -2,6 +2,7 @@ import {
   GeolocateControl,
   MapLibreMap,
   NavigationControl,
+  Popup,
   setWorkerUrl,
   type GeoJSONSource,
   type MapLayerMouseEvent,
@@ -21,6 +22,7 @@ import {
   resolveWindLayerConfig,
   type WmsLayerConfig,
 } from '../lib/wmsLayers'
+import { regionOfLocation } from '../lib/place'
 import type { Location } from '../types/location'
 import type { Warning } from '../types/warning'
 
@@ -49,6 +51,8 @@ interface MapViewProps {
   layers: MapLayerToggles
   wmsTime: string
   selectedTimeIndex: number
+  waterLabel: string
+  onShowDetails: () => void
 }
 
 function loadImageElement(src: string): Promise<HTMLImageElement> {
@@ -99,6 +103,30 @@ function ensureRasterLayer(
   }
 }
 
+
+const PIN_ICON =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>'
+
+const WAVE_ICON =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5c2.5-2 4.5 2 7 0s4.5-2 7 0 4.5 2 6 0"/><path d="M2 13c2.5-2 4.5 2 7 0s4.5-2 7 0 4.5 2 6 0"/><path d="M2 18.5c2.5-2 4.5 2 7 0s4.5-2 7 0 4.5 2 6 0"/></svg>'
+
+function buildPopupContent(location: Location, water: string, onDetails: () => void): HTMLElement {
+  const root = document.createElement('div')
+  root.className = 'mp'
+  root.innerHTML = `
+    <button type="button" class="mp-close" aria-label="Lukk">&times;</button>
+    <h3 class="mp-title"></h3>
+    <p class="mp-region"><span class="mp-icon">${PIN_ICON}</span><span class="mp-region-text"></span></p>
+    <span class="mp-badge"><span class="mp-icon">${WAVE_ICON}</span><span class="mp-badge-text"></span></span>
+    <button type="button" class="mp-cta">Se detaljer</button>
+  `
+  root.querySelector('.mp-title')!.textContent = location.name
+  root.querySelector('.mp-region-text')!.textContent = regionOfLocation(location)
+  root.querySelector('.mp-badge-text')!.textContent = water
+  root.querySelector('.mp-cta')!.addEventListener('click', onDetails)
+  return root
+}
+
 export default function MapView({
   locations,
   warnings,
@@ -108,8 +136,12 @@ export default function MapView({
   layers,
   wmsTime,
   selectedTimeIndex,
+  waterLabel,
+  onShowDetails,
 }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const popupRef = useRef<Popup | null>(null)
+  const onShowDetailsRef = useRef(onShowDetails)
   const mapRef = useRef<MapLibreMap | null>(null)
   const onSelectRef = useRef(onSelect)
   const appliedDarkRef = useRef(dark)
@@ -117,6 +149,7 @@ export default function MapView({
   const [ready, setReady] = useState(false)
 
   onSelectRef.current = onSelect
+  onShowDetailsRef.current = onShowDetails
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -299,9 +332,46 @@ export default function MapView({
 
     const target = locations.find((location) => location.id === selectedId)
     if (target) {
-      map.flyTo({ center: [target.longitude, target.latitude], zoom: Math.max(map.getZoom(), 10) })
+      map.flyTo({
+        center: [target.longitude, target.latitude],
+        zoom: Math.max(map.getZoom(), 10),
+        padding: { top: 190, bottom: 0, left: 0, right: 0 },
+      })
     }
   }, [selectedId, locations])
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !ready) return
+
+    popupRef.current?.remove()
+    popupRef.current = null
+
+    const target = locations.find((location) => location.id === selectedId)
+    if (!target) return
+
+    const node = buildPopupContent(target, waterLabel, () => onShowDetailsRef.current())
+
+    const popup = new Popup({
+      closeButton: false,
+      closeOnClick: false,
+      anchor: 'bottom',
+      offset: 40,
+      maxWidth: '280px',
+      focusAfterOpen: false,
+      className: 'splaesh-popup',
+    })
+      .setLngLat([target.longitude, target.latitude])
+      .setDOMContent(node)
+      .addTo(map)
+
+    node.querySelector('.mp-close')?.addEventListener('click', () => popup.remove())
+    popupRef.current = popup
+
+    return () => {
+      popup.remove()
+    }
+  }, [selectedId, locations, waterLabel, ready, styleEpoch])
 
   return <div className="map" ref={containerRef} />
 }
