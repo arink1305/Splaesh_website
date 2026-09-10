@@ -80,10 +80,15 @@ export default function App() {
     <div className="page">
       <header className="appbar">
         <div className="appbar-inner">
-          <p className="brand">
+          <button
+            type="button"
+            className="brand"
+            onClick={() => setTab('home')}
+            aria-label="Splæsh — gå til hjem"
+          >
             <img className="brand-logo" src="/brand/logo.png" alt="" />
             <span className="brand-word">Splæsh</span>
-          </p>
+          </button>
 
           <nav className="topnav" ref={navRef}>
             {TABS.map(([key, icon, label]) => (
