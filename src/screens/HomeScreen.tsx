@@ -21,6 +21,7 @@ interface HomeScreenProps {
   warnings: Warning[]
   selected: Location | null
   onSelect: (location: Location | null) => void
+  selectionNonce: number
   profile: BathingScoreProfile
   dark: boolean
   layers: MapLayerToggles
@@ -38,6 +39,7 @@ export default function HomeScreen({
   warnings,
   selected,
   onSelect,
+  selectionNonce,
   profile,
   dark,
   layers,
@@ -100,6 +102,7 @@ export default function HomeScreen({
           layers={layers}
           wmsTime={wmsTimeAt(baseTime, selectedTimeIndex)}
           selectedTimeIndex={selectedTimeIndex}
+          selectionNonce={selectionNonce}
           waterLabel={selected ? waterLabel(selected.name, data?.seaCovered) : 'Saltvann'}
           onShowDetails={showDetails}
         />

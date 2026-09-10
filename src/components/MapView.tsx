@@ -51,6 +51,7 @@ interface MapViewProps {
   layers: MapLayerToggles
   wmsTime: string
   selectedTimeIndex: number
+  selectionNonce: number
   waterLabel: string
   onShowDetails: () => void
 }
@@ -136,6 +137,7 @@ export default function MapView({
   layers,
   wmsTime,
   selectedTimeIndex,
+  selectionNonce,
   waterLabel,
   onShowDetails,
 }: MapViewProps) {
@@ -181,6 +183,12 @@ export default function MapView({
     map.on('click', 'places', (event: MapLayerMouseEvent) => {
       const id = event.features?.[0]?.properties?.id
       if (typeof id === 'number') onSelectRef.current(id)
+    })
+
+    map.on('click', (event: MapLayerMouseEvent) => {
+      if (!map.getLayer('places')) return
+      const onPin = map.queryRenderedFeatures(event.point, { layers: ['places'] })
+      if (onPin.length === 0) popupRef.current?.remove()
     })
     map.on('mouseenter', 'places', () => {
       map.getCanvas().style.cursor = 'pointer'
@@ -371,7 +379,7 @@ export default function MapView({
     return () => {
       popup.remove()
     }
-  }, [selectedId, locations, waterLabel, ready, styleEpoch])
+  }, [selectedId, selectionNonce, locations, waterLabel, ready, styleEpoch])
 
   return <div className="map" ref={containerRef} />
 }

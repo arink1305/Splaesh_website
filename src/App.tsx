@@ -32,6 +32,7 @@ export default function App() {
   const [radiusKm, setRadiusKm] = useState(5)
   const [pendingRemovalIds, setPendingRemovalIds] = useState<number[]>([])
   const [mapFocus, setMapFocus] = useState(0)
+  const [selectionNonce, setSelectionNonce] = useState(0)
   const [layers, setLayers] = useState<MapLayerToggles>({
     temp: false,
     rain: false,
@@ -71,15 +72,20 @@ export default function App() {
     [locations, favoriteIds],
   )
 
+  function selectPlace(location: Location | null) {
+    setSelected(location)
+    setSelectionNonce((value) => value + 1)
+  }
+
   function openOnMap(location: Location) {
     skipTopScroll.current = true
-    setSelected(location)
+    selectPlace(location)
     setTab('home')
     setMapFocus((value) => value + 1)
   }
 
   function selectFromSearch(location: Location) {
-    setSelected(location)
+    selectPlace(location)
     setMapFocus((value) => value + 1)
   }
 
@@ -151,7 +157,8 @@ export default function App() {
               locations={locations}
               warnings={warnings}
               selected={selected}
-              onSelect={setSelected}
+              onSelect={selectPlace}
+              selectionNonce={selectionNonce}
               profile={settings.profile}
               dark={settings.dark}
               layers={layers}
