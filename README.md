@@ -53,7 +53,19 @@ Kotlin-kilden det er portet fra ligger i `arink1305/splaesh`. Stiene i tabellen 
 
 Paletten, formene og skjermoppsettet følger Android-appen: teal `#03778A` lyst og `#78D7E2` mørkt, bakgrunn `#F3F6F8` / `#0E1114`, kort med 28 px radius, ikonfliser på 14 px, og segmentkontroller og brikker som piller. Typografien er Inter, som ligger nærmest Material-standarden appen brukte.
 
-Navigasjonen ligger i en klebrig topplinje med logo og «Splæsh» til venstre og de fire destinasjonene til høyre — Android-appen hadde dem i en NavigationBar nederst, som passer dårlig på en nettside.
+Navigasjonen ligger i en klebrig topplinje i full bredde, med logo og «Splæsh» til venstre og de fire destinasjonene til høyre — Android-appen hadde dem i en NavigationBar nederst, som passer dårlig på en nettside. Hjem åpner med en hero: overskrift, søk og en bølget overgang ned mot kartet. Nederst ligger en sidefot med datakilder og kreditering.
+
+### Animasjoner
+
+Holdt diskrete og raske, og alle er slått av under `prefers-reduced-motion`:
+
+- skjermbytte fader inn med 8 px forskyvning
+- kort løftes 2 px ved hover
+- badescoren teller opp fra 0, og ringen rundt fylles i takt (`@property --ring` med CSS-overgang)
+- puls på «live»-prikken i heroen
+- skimmer mens bilder og data lastes
+
+Regnestykket bak opptellingen ligger i `src/lib/animation.ts` og er testet; selve `requestAnimationFrame`-løkka i `useCountUp` er tynn med vilje.
 
 ## Søk
 

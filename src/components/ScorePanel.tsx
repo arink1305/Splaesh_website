@@ -1,6 +1,8 @@
+import { useEffect, useRef, useState } from 'react'
 import Metrics from './Metrics'
 import PlaceImage from './PlaceImage'
 import { degreesToCompass } from '../lib/forecastAggregator'
+import { useCountUp } from '../hooks/useCountUp'
 import type { PlaceData } from '../data/placeData'
 import type { BathingScore } from '../types/bathingScore'
 import type { Location } from '../types/location'
@@ -21,12 +23,26 @@ function bandFor(score: number): 'good' | 'fair' | 'poor' {
   return 'poor'
 }
 
-function ringStyle(score: number, band: string): React.CSSProperties {
-  const color =
-    band === 'good' ? 'var(--safe)' : band === 'fair' ? 'var(--warn)' : 'var(--danger)'
-  return {
-    background: `conic-gradient(${color} ${score * 3.6}deg, var(--sunk) 0deg)`,
-  }
+function ScoreRing({ score, band }: { score: number; band: string }) {
+  const shown = useCountUp(score)
+  const [ring, setRing] = useState(0)
+  const raf = useRef(0)
+
+  useEffect(() => {
+    raf.current = requestAnimationFrame(() => setRing(score * 3.6))
+    return () => cancelAnimationFrame(raf.current)
+  }, [score])
+
+  const color = band === 'good' ? 'var(--safe)' : band === 'fair' ? 'var(--warn)' : 'var(--danger)'
+
+  return (
+    <span
+      className="score-ring"
+      style={{ '--ring': ring, '--ring-color': color } as React.CSSProperties}
+    >
+      <span className="score-ring-inner">{shown}</span>
+    </span>
+  )
 }
 
 export default function ScorePanel({
@@ -53,20 +69,13 @@ export default function ScorePanel({
       {score && data && (
         <>
           <div className="score-row">
-            <span className="score-ring" style={ringStyle(score.score, band)}>
-              <span
-                style={{
-                  background: 'var(--card)',
-                  width: 58,
-                  height: 58,
-                  borderRadius: '50%',
-                  display: 'grid',
-                  placeItems: 'center',
-                }}
-              >
-                {score.isUnavailable ? '–' : score.score}
+            {score.isUnavailable ? (
+              <span className="score-ring">
+                <span className="score-ring-inner">–</span>
               </span>
-            </span>
+            ) : (
+              <ScoreRing score={score.score} band={band} />
+            )}
             <span>
               <span className={`verdict ${band}`}>{score.label}</span>
               <br />

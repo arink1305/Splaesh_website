@@ -1,5 +1,4 @@
 import LayerToggles from '../components/LayerToggles'
-import SearchBar from '../components/SearchBar'
 import MapView, { type MapLayerToggles } from '../components/MapView'
 import ScorePanel from '../components/ScorePanel'
 import TimeScroller from '../components/TimeScroller'
@@ -70,15 +69,10 @@ export default function HomeScreen({
 
   return (
     <>
-      <div className="screen-head">
-        <h1>Hjem</h1>
-        <p>
-          Badeforhold for {locations.length} badeplasser i Norge, med værkartlag og farevarsler
-          direkte i kartet.
-        </p>
+      <div className="section-head">
+        <h2>Kart og værlag</h2>
+        <p>Slå på værkartlag fra Victoria WMS og se farevarsler tegnet rett i kartet.</p>
       </div>
-
-      <SearchBar locations={locations} onSelect={onSelect} />
 
       <LayerToggles layers={layers} onChange={onLayersChange} />
 
@@ -117,7 +111,12 @@ export default function HomeScreen({
       />
 
       <div className="layout">
-        <ul className="places">
+        <div className="places-wrap">
+          <div className="places-head">
+            <h3>Badeplasser</h3>
+            <span>{locations.length}</span>
+          </div>
+          <ul className="places">
           {locations.map((location) => (
             <li key={location.id} className="place-row">
               <button
@@ -142,7 +141,8 @@ export default function HomeScreen({
               </button>
             </li>
           ))}
-        </ul>
+          </ul>
+        </div>
 
         <section className="panel">
           {!selected && <p className="state">Velg en badeplass.</p>}

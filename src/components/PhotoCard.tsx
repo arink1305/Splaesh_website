@@ -25,6 +25,7 @@ export default function PhotoCard({
 }: PhotoCardProps) {
   const [open, setOpen] = useState(false)
   const [imageFailed, setImageFailed] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   return (
     <article className={pending ? 'photo-card pending' : 'photo-card'}>
@@ -34,14 +35,18 @@ export default function PhotoCard({
             🏖
           </div>
         ) : (
-          <img
-            src={location.image}
-            alt={location.name}
-            loading="lazy"
-            decoding="async"
-            referrerPolicy="no-referrer"
-            onError={() => setImageFailed(true)}
-          />
+          <>
+            {!imageLoaded && <span className="photo-skeleton" aria-hidden="true" />}
+            <img
+              src={location.image}
+              alt={location.name}
+              loading="lazy"
+              decoding="async"
+              referrerPolicy="no-referrer"
+              onLoad={() => setImageLoaded(true)}
+              onError={() => setImageFailed(true)}
+            />
+          </>
         )}
 
         {onToggleFavorite && (
