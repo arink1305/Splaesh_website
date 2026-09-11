@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Hero from './components/Hero'
-import type { MapLayerToggles } from './components/MapView'
+import type { FlyTarget, MapLayerToggles } from './components/MapView'
 import SiteFooter from './components/SiteFooter'
 import { getLocations } from './data/locations'
 import { useFavorites } from './hooks/useFavorites'
@@ -11,7 +11,6 @@ import FavoritesScreen from './screens/FavoritesScreen'
 import HomeScreen from './screens/HomeScreen'
 import RecommendationsScreen from './screens/RecommendationsScreen'
 import SettingsScreen from './screens/SettingsScreen'
-import { regionOfLocation } from './lib/place'
 import type { GeoPlace } from './types/geo'
 import type { Location } from './types/location'
 
@@ -35,7 +34,7 @@ export default function App() {
   const [pendingRemovalIds, setPendingRemovalIds] = useState<number[]>([])
   const [mapFocus, setMapFocus] = useState(0)
   const [selectionNonce, setSelectionNonce] = useState(0)
-  const [regionLabel, setRegionLabel] = useState<string | null>(null)
+  const [flyTarget, setFlyTarget] = useState<FlyTarget | null>(null)
   const [layers, setLayers] = useState<MapLayerToggles>({
     temp: false,
     rain: false,
@@ -77,21 +76,15 @@ export default function App() {
 
   function selectPlace(location: Location | null) {
     setSelected(location)
-    setRegionLabel(location ? regionOfLocation(location) : null)
     setSelectionNonce((value) => value + 1)
   }
 
   function selectGeoPlace(place: GeoPlace) {
-    setSelected({
-      id: -1,
-      name: place.name,
+    setFlyTarget((current) => ({
       latitude: place.latitude,
       longitude: place.longitude,
-      image: '',
-      source: 'Stedsøk · OpenStreetMap',
-    })
-    setRegionLabel(place.region)
-    setSelectionNonce((value) => value + 1)
+      nonce: (current?.nonce ?? 0) + 1,
+    }))
     setMapFocus((value) => value + 1)
   }
 
@@ -179,7 +172,7 @@ export default function App() {
               selected={selected}
               onSelect={selectPlace}
               selectionNonce={selectionNonce}
-              regionLabel={regionLabel}
+              flyTarget={flyTarget}
               profile={settings.profile}
               dark={settings.dark}
               layers={layers}

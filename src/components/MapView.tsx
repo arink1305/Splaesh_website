@@ -1,7 +1,6 @@
 import {
   GeolocateControl,
   MapLibreMap,
-  Marker,
   NavigationControl,
   Popup,
   setWorkerUrl,
@@ -36,6 +35,12 @@ const PIN_FILES: Record<string, string> = {
   red: 'pins/badepin1.png',
 }
 
+export interface FlyTarget {
+  latitude: number
+  longitude: number
+  nonce: number
+}
+
 export interface MapLayerToggles {
   temp: boolean
   rain: boolean
@@ -54,7 +59,7 @@ interface MapViewProps {
   wmsTime: string
   selectedTimeIndex: number
   selectionNonce: number
-  regionLabel: string | null
+  flyTarget: FlyTarget | null
   waterLabel: string
   onShowDetails: () => void
 }
@@ -114,12 +119,7 @@ const PIN_ICON =
 const WAVE_ICON =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5c2.5-2 4.5 2 7 0s4.5-2 7 0 4.5 2 6 0"/><path d="M2 13c2.5-2 4.5 2 7 0s4.5-2 7 0 4.5 2 6 0"/><path d="M2 18.5c2.5-2 4.5 2 7 0s4.5-2 7 0 4.5 2 6 0"/></svg>'
 
-function buildPopupContent(
-  location: Location,
-  region: string,
-  water: string,
-  onDetails: () => void,
-): HTMLElement {
+function buildPopupContent(location: Location, water: string, onDetails: () => void): HTMLElement {
   const root = document.createElement('div')
   root.className = 'mp'
   root.innerHTML = `
@@ -130,7 +130,7 @@ function buildPopupContent(
     <button type="button" class="mp-cta">Se detaljer</button>
   `
   root.querySelector('.mp-title')!.textContent = location.name
-  root.querySelector('.mp-region-text')!.textContent = region
+  root.querySelector('.mp-region-text')!.textContent = regionOfLocation(location)
   root.querySelector('.mp-badge-text')!.textContent = water
   root.querySelector('.mp-cta')!.addEventListener('click', onDetails)
   return root
@@ -147,13 +147,12 @@ export default function MapView({
   wmsTime,
   selectedTimeIndex,
   selectionNonce,
-  regionLabel,
+  flyTarget,
   waterLabel,
   onShowDetails,
 }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const popupRef = useRef<Popup | null>(null)
-  const markerRef = useRef<Marker | null>(null)
   const onShowDetailsRef = useRef(onShowDetails)
   const mapRef = useRef<MapLibreMap | null>(null)
   const onSelectRef = useRef(onSelect)
@@ -365,29 +364,11 @@ export default function MapView({
 
     popupRef.current?.remove()
     popupRef.current = null
-    markerRef.current?.remove()
-    markerRef.current = null
 
     const target = selected
     if (!target) return
 
-    const isBathingPlace = locations.some((location) => location.id === target.id)
-    if (!isBathingPlace) {
-      const pin = document.createElement('img')
-      pin.src = `${import.meta.env.BASE_URL}pins/badepin3.png`
-      pin.alt = ''
-      pin.className = 'search-marker'
-      markerRef.current = new Marker({ element: pin, anchor: 'bottom' })
-        .setLngLat([target.longitude, target.latitude])
-        .addTo(map)
-    }
-
-    const node = buildPopupContent(
-      target,
-      regionLabel ?? regionOfLocation(target),
-      waterLabel,
-      () => onShowDetailsRef.current(),
-    )
+    const node = buildPopupContent(target, waterLabel, () => onShowDetailsRef.current())
 
     const popup = new Popup({
       closeButton: false,
@@ -407,10 +388,18 @@ export default function MapView({
 
     return () => {
       popup.remove()
-      markerRef.current?.remove()
-      markerRef.current = null
     }
-  }, [selected, selectionNonce, locations, regionLabel, waterLabel, ready, styleEpoch])
+  }, [selected, selectionNonce, waterLabel, ready, styleEpoch])
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !flyTarget) return
+
+    map.flyTo({
+      center: [flyTarget.longitude, flyTarget.latitude],
+      zoom: Math.max(map.getZoom(), 11),
+    })
+  }, [flyTarget])
 
   return <div className="map" ref={containerRef} />
 }

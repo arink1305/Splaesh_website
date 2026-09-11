@@ -1984,13 +1984,6 @@ html {
   }
 }
 
-.search-marker {
-  width: 34px;
-  height: auto;
-  display: block;
-  filter: drop-shadow(0 3px 6px rgba(16, 24, 40, 0.35));
-}
-
 .suggestion-group {
   padding: 10px 12px 4px;
   font-size: 10.5px;

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import LayerToggles from '../components/LayerToggles'
-import MapView, { type MapLayerToggles } from '../components/MapView'
+import MapView, { type FlyTarget, type MapLayerToggles } from '../components/MapView'
 import ScorePanel from '../components/ScorePanel'
 import TimeScroller from '../components/TimeScroller'
 import { usePlaceData } from '../hooks/usePlaceData'
@@ -22,7 +22,7 @@ interface HomeScreenProps {
   selected: Location | null
   onSelect: (location: Location | null) => void
   selectionNonce: number
-  regionLabel: string | null
+  flyTarget: FlyTarget | null
   profile: BathingScoreProfile
   dark: boolean
   layers: MapLayerToggles
@@ -41,7 +41,7 @@ export default function HomeScreen({
   selected,
   onSelect,
   selectionNonce,
-  regionLabel,
+  flyTarget,
   profile,
   dark,
   layers,
@@ -106,7 +106,7 @@ export default function HomeScreen({
           wmsTime={wmsTimeAt(baseTime, selectedTimeIndex)}
           selectedTimeIndex={selectedTimeIndex}
           selectionNonce={selectionNonce}
-          regionLabel={regionLabel}
+          flyTarget={flyTarget}
           waterLabel={selected ? waterLabel(selected.name, data?.seaCovered) : 'Saltvann'}
           onShowDetails={showDetails}
         />
