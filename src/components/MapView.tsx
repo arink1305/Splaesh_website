@@ -1,6 +1,7 @@
 import {
   GeolocateControl,
   MapLibreMap,
+  Marker,
   NavigationControl,
   Popup,
   setWorkerUrl,
@@ -46,12 +47,14 @@ interface MapViewProps {
   locations: Location[]
   warnings: Warning[]
   selectedId: number | null
+  selected: Location | null
   onSelect: (id: number) => void
   dark: boolean
   layers: MapLayerToggles
   wmsTime: string
   selectedTimeIndex: number
   selectionNonce: number
+  regionLabel: string | null
   waterLabel: string
   onShowDetails: () => void
 }
@@ -111,7 +114,12 @@ const PIN_ICON =
 const WAVE_ICON =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7.5c2.5-2 4.5 2 7 0s4.5-2 7 0 4.5 2 6 0"/><path d="M2 13c2.5-2 4.5 2 7 0s4.5-2 7 0 4.5 2 6 0"/><path d="M2 18.5c2.5-2 4.5 2 7 0s4.5-2 7 0 4.5 2 6 0"/></svg>'
 
-function buildPopupContent(location: Location, water: string, onDetails: () => void): HTMLElement {
+function buildPopupContent(
+  location: Location,
+  region: string,
+  water: string,
+  onDetails: () => void,
+): HTMLElement {
   const root = document.createElement('div')
   root.className = 'mp'
   root.innerHTML = `
@@ -122,7 +130,7 @@ function buildPopupContent(location: Location, water: string, onDetails: () => v
     <button type="button" class="mp-cta">Se detaljer</button>
   `
   root.querySelector('.mp-title')!.textContent = location.name
-  root.querySelector('.mp-region-text')!.textContent = regionOfLocation(location)
+  root.querySelector('.mp-region-text')!.textContent = region
   root.querySelector('.mp-badge-text')!.textContent = water
   root.querySelector('.mp-cta')!.addEventListener('click', onDetails)
   return root
@@ -132,17 +140,20 @@ export default function MapView({
   locations,
   warnings,
   selectedId,
+  selected,
   onSelect,
   dark,
   layers,
   wmsTime,
   selectedTimeIndex,
   selectionNonce,
+  regionLabel,
   waterLabel,
   onShowDetails,
 }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const popupRef = useRef<Popup | null>(null)
+  const markerRef = useRef<Marker | null>(null)
   const onShowDetailsRef = useRef(onShowDetails)
   const mapRef = useRef<MapLibreMap | null>(null)
   const onSelectRef = useRef(onSelect)
@@ -338,7 +349,7 @@ export default function MapView({
     const map = mapRef.current
     if (!map || selectedId === null) return
 
-    const target = locations.find((location) => location.id === selectedId)
+    const target = selected
     if (target) {
       map.flyTo({
         center: [target.longitude, target.latitude],
@@ -346,7 +357,7 @@ export default function MapView({
         padding: { top: 190, bottom: 0, left: 0, right: 0 },
       })
     }
-  }, [selectedId, locations])
+  }, [selected])
 
   useEffect(() => {
     const map = mapRef.current
@@ -354,11 +365,29 @@ export default function MapView({
 
     popupRef.current?.remove()
     popupRef.current = null
+    markerRef.current?.remove()
+    markerRef.current = null
 
-    const target = locations.find((location) => location.id === selectedId)
+    const target = selected
     if (!target) return
 
-    const node = buildPopupContent(target, waterLabel, () => onShowDetailsRef.current())
+    const isBathingPlace = locations.some((location) => location.id === target.id)
+    if (!isBathingPlace) {
+      const pin = document.createElement('img')
+      pin.src = `${import.meta.env.BASE_URL}pins/badepin3.png`
+      pin.alt = ''
+      pin.className = 'search-marker'
+      markerRef.current = new Marker({ element: pin, anchor: 'bottom' })
+        .setLngLat([target.longitude, target.latitude])
+        .addTo(map)
+    }
+
+    const node = buildPopupContent(
+      target,
+      regionLabel ?? regionOfLocation(target),
+      waterLabel,
+      () => onShowDetailsRef.current(),
+    )
 
     const popup = new Popup({
       closeButton: false,
@@ -378,8 +407,10 @@ export default function MapView({
 
     return () => {
       popup.remove()
+      markerRef.current?.remove()
+      markerRef.current = null
     }
-  }, [selectedId, selectionNonce, locations, waterLabel, ready, styleEpoch])
+  }, [selected, selectionNonce, locations, regionLabel, waterLabel, ready, styleEpoch])
 
   return <div className="map" ref={containerRef} />
 }

@@ -11,6 +11,8 @@ import FavoritesScreen from './screens/FavoritesScreen'
 import HomeScreen from './screens/HomeScreen'
 import RecommendationsScreen from './screens/RecommendationsScreen'
 import SettingsScreen from './screens/SettingsScreen'
+import { regionOfLocation } from './lib/place'
+import type { GeoPlace } from './types/geo'
 import type { Location } from './types/location'
 
 type Tab = 'favorites' | 'home' | 'recommendations' | 'settings'
@@ -33,6 +35,7 @@ export default function App() {
   const [pendingRemovalIds, setPendingRemovalIds] = useState<number[]>([])
   const [mapFocus, setMapFocus] = useState(0)
   const [selectionNonce, setSelectionNonce] = useState(0)
+  const [regionLabel, setRegionLabel] = useState<string | null>(null)
   const [layers, setLayers] = useState<MapLayerToggles>({
     temp: false,
     rain: false,
@@ -74,7 +77,22 @@ export default function App() {
 
   function selectPlace(location: Location | null) {
     setSelected(location)
+    setRegionLabel(location ? regionOfLocation(location) : null)
     setSelectionNonce((value) => value + 1)
+  }
+
+  function selectGeoPlace(place: GeoPlace) {
+    setSelected({
+      id: -1,
+      name: place.name,
+      latitude: place.latitude,
+      longitude: place.longitude,
+      image: '',
+      source: 'Stedsøk · OpenStreetMap',
+    })
+    setRegionLabel(place.region)
+    setSelectionNonce((value) => value + 1)
+    setMapFocus((value) => value + 1)
   }
 
   function openOnMap(location: Location) {
@@ -88,6 +106,7 @@ export default function App() {
     selectPlace(location)
     setMapFocus((value) => value + 1)
   }
+
 
   function togglePendingRemoval(id: number) {
     setPendingRemovalIds((current) =>
@@ -146,7 +165,8 @@ export default function App() {
         <Hero
           locations={locations}
           warningCount={warnings.length}
-          onSelect={selectFromSearch}
+          onSelectLocation={selectFromSearch}
+          onSelectPlace={selectGeoPlace}
         />
       )}
 
@@ -159,6 +179,7 @@ export default function App() {
               selected={selected}
               onSelect={selectPlace}
               selectionNonce={selectionNonce}
+              regionLabel={regionLabel}
               profile={settings.profile}
               dark={settings.dark}
               layers={layers}

@@ -1983,3 +1983,19 @@ html {
     font-size: 13.5px;
   }
 }
+
+.search-marker {
+  width: 34px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 3px 6px rgba(16, 24, 40, 0.35));
+}
+
+.suggestion-group {
+  padding: 10px 12px 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}

@@ -1,13 +1,20 @@
 import SearchBar from './SearchBar'
+import type { GeoPlace } from '../types/geo'
 import type { Location } from '../types/location'
 
 interface HeroProps {
   locations: Location[]
   warningCount: number
-  onSelect: (location: Location) => void
+  onSelectLocation: (location: Location) => void
+  onSelectPlace: (place: GeoPlace) => void
 }
 
-export default function Hero({ locations, warningCount, onSelect }: HeroProps) {
+export default function Hero({
+  locations,
+  warningCount,
+  onSelectLocation,
+  onSelectPlace,
+}: HeroProps) {
   return (
     <section className="hero">
       <div className="hero-inner">
@@ -19,7 +26,11 @@ export default function Hero({ locations, warningCount, onSelect }: HeroProps) {
           i én badescore.
         </p>
 
-        <SearchBar locations={locations} onSelect={onSelect} />
+        <SearchBar
+          locations={locations}
+          onSelectLocation={onSelectLocation}
+          onSelectPlace={onSelectPlace}
+        />
 
         <p className="hero-meta">
           <span className="live-dot" aria-hidden="true" />

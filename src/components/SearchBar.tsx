@@ -1,19 +1,43 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { usePlaceSearch } from '../hooks/usePlaceSearch'
 import { searchLocations } from '../lib/search'
+import type { GeoPlace } from '../types/geo'
 import type { Location } from '../types/location'
 
 interface SearchBarProps {
   locations: Location[]
-  onSelect: (location: Location) => void
+  onSelectLocation: (location: Location) => void
+  onSelectPlace: (place: GeoPlace) => void
 }
 
-export default function SearchBar({ locations, onSelect }: SearchBarProps) {
+type Row =
+  | { kind: 'location'; location: Location }
+  | { kind: 'place'; place: GeoPlace }
+
+export default function SearchBar({
+  locations,
+  onSelectLocation,
+  onSelectPlace,
+}: SearchBarProps) {
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState(0)
   const wrapRef = useRef<HTMLDivElement>(null)
 
-  const suggestions = useMemo(() => searchLocations(locations, query), [locations, query])
+  const matches = useMemo(() => searchLocations(locations, query), [locations, query])
+  const { places, loading } = usePlaceSearch(query)
+
+  const rows = useMemo<Row[]>(
+    () => [
+      ...matches.map((location) => ({ kind: 'location' as const, location })),
+      ...places.map((place) => ({ kind: 'place' as const, place })),
+    ],
+    [matches, places],
+  )
+
+  useEffect(() => {
+    setActive(0)
+  }, [rows.length])
 
   useEffect(() => {
     function onDocumentClick(event: MouseEvent) {
@@ -23,28 +47,35 @@ export default function SearchBar({ locations, onSelect }: SearchBarProps) {
     return () => document.removeEventListener('mousedown', onDocumentClick)
   }, [])
 
-  function choose(location: Location) {
-    onSelect(location)
-    setQuery(location.name)
+  function choose(row: Row) {
+    if (row.kind === 'location') {
+      onSelectLocation(row.location)
+      setQuery(row.location.name)
+    } else {
+      onSelectPlace(row.place)
+      setQuery(row.place.name)
+    }
     setOpen(false)
   }
 
   function onKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (!open || suggestions.length === 0) return
+    if (!open || rows.length === 0) return
 
     if (event.key === 'ArrowDown') {
       event.preventDefault()
-      setActive((index) => (index + 1) % suggestions.length)
+      setActive((index) => (index + 1) % rows.length)
     } else if (event.key === 'ArrowUp') {
       event.preventDefault()
-      setActive((index) => (index - 1 + suggestions.length) % suggestions.length)
+      setActive((index) => (index - 1 + rows.length) % rows.length)
     } else if (event.key === 'Enter') {
       event.preventDefault()
-      choose(suggestions[active] ?? suggestions[0])
+      choose(rows[active] ?? rows[0])
     } else if (event.key === 'Escape') {
       setOpen(false)
     }
   }
+
+  const trimmed = query.trim()
 
   return (
     <div className="search" ref={wrapRef}>
@@ -55,12 +86,11 @@ export default function SearchBar({ locations, onSelect }: SearchBarProps) {
         <input
           type="search"
           value={query}
-          placeholder="Søk etter badeplass …"
-          aria-label="Søk etter badeplass"
+          placeholder="Søk etter badeplass eller sted …"
+          aria-label="Søk etter badeplass eller sted"
           autoComplete="off"
           onChange={(event) => {
             setQuery(event.target.value)
-            setActive(0)
             setOpen(true)
           }}
           onFocus={() => setOpen(true)}
@@ -70,36 +100,66 @@ export default function SearchBar({ locations, onSelect }: SearchBarProps) {
           type="button"
           className="search-submit"
           onClick={() => {
-            if (suggestions.length > 0) choose(suggestions[0])
+            if (rows.length > 0) choose(rows[0])
           }}
         >
           <span aria-hidden="true">🔍</span> Søk
         </button>
       </div>
 
-      {open && query.trim().length > 0 && (
+      {open && trimmed.length > 0 && (
         <ul className="suggestions">
-          {suggestions.length === 0 ? (
-            <li className="suggestion empty">Ingen badeplasser matcher «{query.trim()}».</li>
-          ) : (
-            suggestions.map((location, index) => (
-              <li key={location.id}>
+          {matches.length > 0 && <li className="suggestion-group">Badeplasser</li>}
+          {matches.map((location, index) => (
+            <li key={`l-${location.id}`}>
+              <button
+                type="button"
+                className={index === active ? 'suggestion active' : 'suggestion'}
+                onMouseEnter={() => setActive(index)}
+                onClick={() => choose({ kind: 'location', location })}
+              >
+                <span className="suggestion-pin" aria-hidden="true">
+                  🏖
+                </span>
+                <span>
+                  <strong>{location.name}</strong>
+                  <span className="suggestion-sub">Badeplass</span>
+                </span>
+              </button>
+            </li>
+          ))}
+
+          {(places.length > 0 || loading) && <li className="suggestion-group">Steder</li>}
+          {places.map((place, index) => {
+            const rowIndex = matches.length + index
+            return (
+              <li key={`p-${place.name}-${place.latitude}-${place.longitude}`}>
                 <button
                   type="button"
-                  className={index === active ? 'suggestion active' : 'suggestion'}
-                  onMouseEnter={() => setActive(index)}
-                  onClick={() => choose(location)}
+                  className={rowIndex === active ? 'suggestion active' : 'suggestion'}
+                  onMouseEnter={() => setActive(rowIndex)}
+                  onClick={() => choose({ kind: 'place', place })}
                 >
                   <span className="suggestion-pin" aria-hidden="true">
                     📍
                   </span>
                   <span>
-                    <strong>{location.name}</strong>
-                    <span className="suggestion-sub">Badeplass</span>
+                    <strong>{place.name}</strong>
+                    <span className="suggestion-sub">
+                      {place.kind} · {place.region}
+                    </span>
                   </span>
                 </button>
               </li>
-            ))
+            )
+          })}
+
+          {loading && places.length === 0 && (
+            <li className="suggestion empty">Søker etter steder …</li>
+          )}
+
+          {!loading && rows.length === 0 && (
+            <li className="suggestion empty">Ingen treff på «{trimmed}».</li>
           )}
         </ul>
       )}
